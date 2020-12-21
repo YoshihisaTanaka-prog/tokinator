@@ -1,0 +1,2 @@
+class AuthoController < ApplicationController
+end

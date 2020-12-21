@@ -1,0 +1,2 @@
+class UCount < ApplicationRecord
+end

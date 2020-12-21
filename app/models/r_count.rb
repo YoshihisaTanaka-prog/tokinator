@@ -1,0 +1,2 @@
+class RCount < ApplicationRecord
+end
