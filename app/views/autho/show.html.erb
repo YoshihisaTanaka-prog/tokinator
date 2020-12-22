@@ -1,0 +1,16 @@
+<h1><%= @title %></h1>
+<table>
+    <% @tables.each do |t| %>
+    <tr>
+        <td>
+            <%= link_to t.table_name , edits_show_path( :id => t.after_id, :title => t.next_title_name ) %>
+        </td>
+        <td>
+            <%= link_to "編集" , edits_edit_path( :id => t.id, :title => @title, :before_id => params["id"] )  %>
+        </td>
+    </tr>
+    <% end %>
+    <tr>
+        <td><%= link_to "+", edits_add_path( :before_id => params["id"], :ids => @ids ) %></td>
+    </tr>
+</table>

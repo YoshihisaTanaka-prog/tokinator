@@ -1,0 +1,15 @@
+<%= form_tag edits_create_route_path( :ids => params["ids"], :title => params["title"], :before_id => params["before_id"] ) do %>
+<table>
+    <tr>
+        <th>選択肢を記入</th>
+        <td><%= text_field_tag("table_name")  %></td>
+    </tr>
+    <tr>
+        <th>次のページのタイトル名を記入</th>
+        <td><%= text_field_tag("next_title_name") %></td>
+    </tr>
+    <tr>
+    <th></th>
+    <td><%= submit_tag("追加")%></td>
+    </tr>
+<% end %>

@@ -31,19 +31,18 @@ class AuthoController < ApplicationController
         obj.next_title_name = params["next_title_name"]
         obj.save
 
-        redirect_to controller: :edits, action: :show, params: {"title": @title , "id": @before_id}
+        redirect_to controller: :autho, action: :show, params: {"title": @title , "id": @before_id}
     end
 
 
     # 追加系
 
-    def add_route
+    def edit_add
         limit_normal 2
-
         @route = Route.new
     end
 
-    def create_route
+    def edit_create
         limit_normal 2
 
         if request.post? then
@@ -57,7 +56,7 @@ class AuthoController < ApplicationController
         end
         @title = params["title"]
         @before_id = params["before_id"]
-        redirect_to controller: :edits, action: :show, params: {"title": @title , "id": @before_id}
+        redirect_to controller: :autho, action: :show, params: {"title": @title , "id": @before_id}
     end
 
     def show

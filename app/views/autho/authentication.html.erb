@@ -1,0 +1,35 @@
+
+<p><%= @msg %></p>
+<table>
+    <%= search_form_for @q, url: edits_authentication_path do |f| %>
+    <%= f.label :email_or_level, "キーワード検索" %>
+    <br>
+    <%= f.search_field :email_or_level_cont %>
+    <%= f.submit "検索" %>
+    <% end %>
+</table>
+
+<hr>
+
+<table>
+    <% if !@users.blank? then%>
+        <tr>
+            <th>Mail</th><th>　Id　</th><th>　Level　</th><th>　レベルダウン　</th><th>　レベルアップ　</th>
+        </tr>
+        <% @users.each do |obj| %>
+        <tr>
+            <td><%= obj.email %></td>
+            <td align = "center" ><%= obj.id %></td>
+            <td align = "center" ><%= obj.level %></td>
+            
+            <% if obj.level == 0 then %>
+                <td align = "center" >x</td>
+            <% else %>
+                <td align = "center" ><%= link_to "-" ,edits_aupdate_path( {:user_id => obj.id, :level => obj.level - 1} ) %></td>
+            <% end %>
+            
+            <td align = "center" ><%= link_to "+" ,edits_aupdate_path( {:user_id => obj.id, :level => obj.level + 1} ) %></td>
+        </tr>
+        <% end %>
+    <% end %>
+</table>
