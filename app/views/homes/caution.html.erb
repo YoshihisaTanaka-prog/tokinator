@@ -1,0 +1,9 @@
+<h1>Homes#caution</h1>
+<p>
+「<%= current_user.email %>」さんには権限が与えられていません。<br>
+アクセスしようとしたページには<font color = red><%= @level %></font>が必要です。
+</p>
+
+<p><a href = "../">"トップページに戻る"</a></p>
+
+<p><%= link_to 'LOG OUT', destroy_user_session_path, method: :delete %></p>

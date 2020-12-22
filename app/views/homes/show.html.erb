@@ -1,0 +1,10 @@
+<h1><%= @title %></h1>
+<table>
+    <% @tables.each do |t| %>
+    <tr>
+        <td>
+            <%= link_to t.table_name , homes_show_path( :id => t.after_id, :title => t.next_title_name) %>
+        </td>
+    </tr>
+    <% end %>
+</table>

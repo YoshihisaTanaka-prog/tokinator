@@ -1,0 +1,14 @@
+<table>
+    <tr>
+    <th>Mail</th><th>　Score1　</th><th>　Score2　</th>
+    </tr>
+    <% @users.each do |u| %>
+    <% num = 0 %>
+    <tr>
+        <td><%= u.email %></td>
+        <td align = "center"><%= @users_scores[num]["score1"] %></td>
+        <td align = "center"><%= @users_scores[num]["score2"] %></td>
+    </tr>
+    <% num += 1 %>
+    <% end %>
+</table>
