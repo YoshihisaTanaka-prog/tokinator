@@ -6,8 +6,8 @@ class CreateRoutes < ActiveRecord::Migration[6.0]
       t.string        :next_title_name
       t.string        :table_name
       t.string        :after_id
-      t.integer       :num_of_accessed,              null: false, default: 0
-      t.integer       :num_of_error_reported,        null: false, default: 0
+      t.text          :comment
+      t.integer       :strength
 
       t.timestamps
     end
