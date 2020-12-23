@@ -9,10 +9,10 @@ class HomesController < ApplicationController
     def show
       @title = params["title"]
       @tables = Route.where(before_id: params["id"], strength: 0..)
-      # get_routes = Route.where(before_id: params["id"])
-      # if get_routes.blank? then
-      #   redirect_to  controller: :homes, action: :constructing, params: {"title": @title , "id": params["id"]}
-      # end
+      get_routes = Route.where(before_id: params["id"])
+      if get_routes.blank? then
+        redirect_to  controller: :homes, action: :constructing, params: {"title": @title , "id": params["id"]}
+      end
 
       # strength_max = 0
       # get_tables = []
