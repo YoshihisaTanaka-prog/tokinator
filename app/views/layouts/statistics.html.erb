@@ -1,6 +1,21 @@
-<%= link_to "編集", edits_path %></p>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Tokinator</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
 
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
-<%= yield %>
-<p><%= link_to 'LOG OUT', destroy_user_session_path, method: :delete %></p>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+  
+    <p><%= link_to "編集", edits_path %></p>
+
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+    <%= yield %>
+    <p><%= link_to 'LOG OUT', destroy_user_session_path, method: :delete %></p>
+  </body>
+</html>

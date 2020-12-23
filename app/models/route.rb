@@ -14,12 +14,10 @@ class Route < ApplicationRecord
             counts = RCount.where(route_id: id, title: t).order(created_at)
 
             if counts.blank? or counts.last.created_at < self.latest_date then
-                if  then
                 c = RCount.new
                 c.route_id = id
                 c.title = t
                 counts.push(c)
-                end
             end
 
             ret[t] = counts

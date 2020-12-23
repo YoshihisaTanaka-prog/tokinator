@@ -15,9 +15,9 @@ Rails.application.routes.draw do
 
   get 'edits/caution', to: 'autho#caution'
 
-  get 'edits/aupdate', to: 'autho#authentication_update'
-  post 'edits/aupdate', to: 'autho#authentication_update'
-  patch 'edits/aupdate', to: 'autho#authentication_update'
+  get 'autho/update', to: 'autho#authentication_update'
+  post 'autho/update', to: 'autho#authentication_update'
+  patch 'autho/update', to: 'autho#authentication_update'
 
   get 'edits/add', to: 'autho#edit_add'
   post 'edits/add', to: 'autho#edit_add'
@@ -37,6 +37,5 @@ Rails.application.routes.draw do
     get '/users/sign_out' => 'devise/sessions#destroy'
   end
 
-  devise_for :users
   devise_for :users
 end

@@ -1,7 +1,7 @@
 
 <p><%= @msg %></p>
 <table>
-    <%= search_form_for @q, url: edits_authentication_path do |f| %>
+    <%= search_form_for @q, url: autho_path do |f| %>
     <%= f.label :email_or_level, "キーワード検索" %>
     <br>
     <%= f.search_field :email_or_level_cont %>
@@ -25,11 +25,14 @@
             <% if obj.level == 0 then %>
                 <td align = "center" >x</td>
             <% else %>
-                <td align = "center" ><%= link_to "-" ,edits_aupdate_path( {:user_id => obj.id, :level => obj.level - 1} ) %></td>
+                <td align = "center" ><%= link_to "-" ,autho_update_path( {:user_id => obj.id, :level => obj.level - 1} ) %></td>
             <% end %>
             
-            <td align = "center" ><%= link_to "+" ,edits_aupdate_path( {:user_id => obj.id, :level => obj.level + 1} ) %></td>
+            <td align = "center" ><%= link_to "+" ,autho_update_path( {:user_id => obj.id, :level => obj.level + 1} ) %></td>
         </tr>
         <% end %>
     <% end %>
 </table>
+
+<hr>
+<p><%= link_to "編集", edits_path %></p>

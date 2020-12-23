@@ -82,7 +82,7 @@ class AuthoController < ApplicationController
         obj.level = params[:level]
         obj.save
         
-        redirect_to "/edits/authentication"
+        redirect_to "/autho"
     end
   
     def authentication
