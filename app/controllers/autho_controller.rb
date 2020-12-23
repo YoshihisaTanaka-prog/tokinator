@@ -12,7 +12,22 @@ class AuthoController < ApplicationController
     end
 
 
-    # 編集系
+    # 簡易編集系
+    def plus
+        limit_normal 2
+
+        @id = params["id"]
+        @title = params["title"]
+        @before_id = params["before_id"]
+        obj = Route.find(@id)
+        obj.strength = params["strength"]
+        obj.group = params["group"]
+        obj.save
+
+        redirect_to controller: :autho, action: :show, params: {"title": @title , "id": @before_id}
+    end
+
+    # 入力編集系
 
     def edit
         limit_normal 2
