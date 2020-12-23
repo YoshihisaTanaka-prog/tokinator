@@ -74,16 +74,34 @@ class AuthoController < ApplicationController
         redirect_to controller: :autho, action: :show, params: {"title": @title , "id": @before_id}
     end
 
+    # 表示系
+
     def show
         limit_normal 2
-        @title = params["title"]
         @before_id = params["id"]
+        if @before_id == "0"
+            @before_title = "どのジャンルの問題ですか？"
+        else
+            @bbefore_id = Route.where(after_id: @before_id).last.before_id
+            if @bbefore_id == "0"
+                @before_title = "どのジャンルの問題ですか？"
+            else
+                @before_title = Route.where(after_id: @bbefore_id).last.next_title_name
+            end
+        end
+        @title = params["title"]
         @tables = Route.where(before_id: @before_id)
 
         @ids = "0"
         @tables.each do |t|
             @ids = t.after_id
         end
+    end
+
+    def search
+       id = params["id"]
+       route = Route.where(after_id: id)
+       redirect_to controller: :autho, action: :show, params: {"title": route.last.next_title_name , "id": id}
     end
 
 

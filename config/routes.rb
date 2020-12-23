@@ -26,6 +26,8 @@ Rails.application.routes.draw do
   post 'edits/edit', to: 'autho#edit'
   get 'edits/plus', to: 'autho#plus'
   post 'edits/plus', to: 'autho#plus'
+  get 'edits/search', to: 'autho#search'
+  post 'edits/search', to: 'autho#search'
   get 'edits/show', to: 'autho#show'
   post 'edits/show', to: 'autho#show'
   post 'edits/edit_update', to: 'autho#edit_update'
