@@ -80,9 +80,9 @@ class AuthoController < ApplicationController
         limit_normal 2
         @before_id = params["id"]
         if @before_id == "0"
-            @before_title = "どのジャンルの問題ですか？"
+            @before_title = ""
         elsif @before_id == "1"
-            @before_title = "どのジャンルの計算ですか？"
+            @before_title = ""
         else
             @bbefore_id = Route.where(after_id: @before_id).last.before_id
             if @bbefore_id == "0" then
@@ -94,7 +94,7 @@ class AuthoController < ApplicationController
             end
         end
         @title = params["title"]
-        @tables = Route.where(before_id: @before_id)
+        @tables = Route.where(before_id: @before_id).order(:id)
 
         @ids = "0"
         @tables.each do |t|
