@@ -81,10 +81,14 @@ class AuthoController < ApplicationController
         @before_id = params["id"]
         if @before_id == "0"
             @before_title = "どのジャンルの問題ですか？"
+        elsif @before_id == "1"
+            @before_title = "どのジャンルの計算ですか？"
         else
             @bbefore_id = Route.where(after_id: @before_id).last.before_id
-            if @bbefore_id == "0"
+            if @bbefore_id == "0" then
                 @before_title = "どのジャンルの問題ですか？"
+            elsif @bbefore_id == "1" then
+                @before_title = "どのジャンルの計算ですか？"
             else
                 @before_title = Route.where(after_id: @bbefore_id).last.next_title_name
             end
@@ -99,9 +103,19 @@ class AuthoController < ApplicationController
     end
 
     def search
-       id = params["id"]
-       route = Route.where(after_id: id)
-       redirect_to controller: :autho, action: :show, params: {"title": route.last.next_title_name , "id": id}
+        id = params["id"]
+        if id == "0" then
+            redirect_to controller: :autho, action: :show, params: {"title": "どのジャンルの問題ですか？" , "id": "0"}
+        elsif id == "1" then
+            redirect_to controller: :autho, action: :show, params: {"title": "どのジャンルの計算ですか？" , "id": "1"}
+        else
+            route = Route.where(after_id: id)
+            if route.blank? then
+                edits_path
+            else
+                redirect_to controller: :autho, action: :show, params: {"title": route.last.next_title_name , "id": id}
+            end
+        end
     end
 
 

@@ -9,6 +9,8 @@
 <hr>
 <% if @before_id == "0" then %>
     <%= link_to "戻る",edits_path %>
+<% elsif @before_id == "1" then %>
+    <%= link_to "戻る",edits_path %>
 <% else %>
     <%= link_to "戻る", edits_show_path( :id => @bbefore_id, :title => @before_title ) %>
 <% end %>

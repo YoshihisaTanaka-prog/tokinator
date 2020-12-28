@@ -37,6 +37,8 @@ Rails.application.routes.draw do
   get 'constructing'   , to: 'homes#constructing'
   get 'caution'        , to: 'homes#caution'
 
+  get 'app/show'       , to: 'app_homes#show'
+
 
   devise_scope :user do
     get '/users/sign_out' => 'devise/sessions#destroy'
