@@ -2,11 +2,6 @@ Rails.application.routes.draw do
   
   root to: 'homes#index'
 
-  get 'index'        , to: 'homes#index'
-  get 'show'         , to: 'homes#show'
-  get 'constructing' , to: 'homes#constructing'
-  get 'caution'      , to: 'homes#caution'
-
   
   get 'autho', to: 'autho#authentication'
   post 'autho', to: 'autho#authentication'
@@ -35,6 +30,13 @@ Rails.application.routes.draw do
 
 
   get 'statistics', to: 'statistics#index'
+
+
+  get 'index'          , to: 'homes#index'
+  get 'show'           , to: 'homes#show'
+  get 'constructing'   , to: 'homes#constructing'
+  get 'caution'        , to: 'homes#caution'
+
 
   devise_scope :user do
     get '/users/sign_out' => 'devise/sessions#destroy'
