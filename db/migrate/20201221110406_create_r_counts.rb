@@ -6,7 +6,7 @@ class CreateRCounts < ActiveRecord::Migration[6.0]
       t.integer   :count, null: false, default: 0
       t.string    :title
 
-      t.timestamps
+      t.timestamps null: false
     end
   end
 end

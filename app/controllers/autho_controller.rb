@@ -63,8 +63,7 @@ class AuthoController < ApplicationController
         if request.post? then
 
             # 次のIDを取得
-            ids = params["ids"].split("-")
-            next_id = params["before_id"] + "-" + ((ids.last.to_i) + 1).to_s
+            next_id = params["before_id"] + "-" + (params["ids"].to_i + 1).to_s
 
             obj = Route.new({ before_id: params["before_id"], table_name: params["table_name"], next_title_name: params["next_title_name"], after_id: next_id })
             obj.save
@@ -94,11 +93,14 @@ class AuthoController < ApplicationController
             end
         end
         @title = params["title"]
-        @tables = Route.where(before_id: @before_id).order(:id)
+        @tables = get_table @before_id,0,nil
 
-        @ids = "0"
+        @ids = 0
         @tables.each do |t|
-            @ids = t.after_id
+            id =  t["after_id"].split("-").last.to_i
+            if @ids < id
+                @ids = id
+            end
         end
     end
 
@@ -111,7 +113,7 @@ class AuthoController < ApplicationController
         else
             route = Route.where(after_id: id)
             if route.blank? then
-                edits_path
+                redirect_to edits_path
             else
                 redirect_to controller: :autho, action: :show, params: {"title": route.last.next_title_name , "id": id}
             end

@@ -1,9 +1,8 @@
 <h1>「<%= @title %>」の編集</h1>
 
 <hr>
-<%= form_tag edits_search_path( :ids => params["ids"], :title => params["title"], :before_id => params["before_id"] ) do %>
-<table>
-    <%= text_field_tag("id") %>
+<%= form_tag edits_search_path( :before_id => params["before_id"] ) do %>
+    <%= text_field_tag("id")%>
     <%= submit_tag("検索") %>
 <% end %>
 <hr>
@@ -25,10 +24,10 @@
     <% @tables.each do |t| %>
     <tr>
         <td>
-            <%= link_to t.table_name , edits_show_path( :id => t.after_id, :title => t.next_title_name ) %>
+            <%= link_to t["table_name"] , edits_show_path( :id => t["after_id"], :title => t["next_title_name"]) %>
         </td>
         
-        <% if t.strength == -1 then %>
+        <% if t["strength"] == -1 then %>
             <td>
                 /
             </td>
@@ -36,49 +35,49 @@
                 x
             </td>
             <td>
-                <%= link_to "+" , edits_plus_path( :id => t.id, :title => @title, :before_id => params["id"], :strength => t.strength+1, :group => t.group ) %>
+                <%= link_to "+" , edits_plus_path( :id => t["id"], :title => @title, :before_id => params["id"], :strength => t["strength"]+1, :group => t["group"] ) %>
             </td>
         <% end %>
         
-        <% if t.strength == 0 then %>
+        <% if t['strength'] == 0 then %>
             <td>
-                <%= t.strength %>
+                <%= t['strength'] %>
             </td>
             <td>
-                <%= link_to "/" , edits_plus_path( :id => t.id, :title => @title, :before_id => params["id"], :strength => t.strength-1, :group => t.group ) %>
+                <%= link_to "/" , edits_plus_path( :id => t["id"], :title => @title, :before_id => params["id"], :strength => t["strength"]-1, :group => t["group"] ) %>
             </td>
             <td>
-                <%= link_to "+" , edits_plus_path( :id => t.id, :title => @title, :before_id => params["id"], :strength => t.strength+1, :group => t.group ) %>
+                <%= link_to "+" , edits_plus_path( :id => t["id"], :title => @title, :before_id => params["id"], :strength => t["strength"]+1, :group => t["group"] ) %>
             </td>
         <% end %>
         
-        <% if t.strength > 0 then %>
+        <% if t['strength'] > 0 then %>
             <td>
-                <%= t.strength %>
+                <%= t['strength'] %>
             </td>
             <td>
-                <%= link_to "-" , edits_plus_path( :id => t.id, :title => @title, :before_id => params["id"], :strength => t.strength-1, :group => t.group ) %>
+                <%= link_to "-" , edits_plus_path( :id => t['id'], :title => @title, :before_id => params["id"], :strength => t['strength']-1, :group => t['group'] ) %>
             </td>
             <td>
-                <%= link_to "+" , edits_plus_path( :id => t.id, :title => @title, :before_id => params["id"], :strength => t.strength+1, :group => t.group ) %>
+                <%= link_to "+" , edits_plus_path( :id => t['id'], :title => @title, :before_id => params["id"], :strength => t['strength']+1, :group => t['group'] ) %>
             </td>
         <% end %>
 
         <td>
-            <%= t.group %>
+            <%= t['group'] %>
         </td>
         <td>
-            <% if t.group == 0 then%>
+            <% if t['group'] == 0 then%>
                 x
             <% else %>
-                <%= link_to "-" , edits_plus_path( :id => t.id, :title => @title, :before_id => params["id"], :strength => t.strength, :group => t.group-1 ) %>
+                <%= link_to "-" , edits_plus_path( :id => t['id'], :title => @title, :before_id => params["id"], :strength => t['strength'], :group => t['group']-1 ) %>
             <% end %>
         </td>
         <td>
-            <%= link_to "+" , edits_plus_path( :id => t.id, :title => @title, :before_id => params["id"], :strength => t.strength, :group => t.group+1 ) %>
+            <%= link_to "+" , edits_plus_path( :id => t['id'], :title => @title, :before_id => params["id"], :strength => t['strength'], :group => t['group']+1 ) %>
         </td>
         <td>
-            <%= link_to "編集" , edits_edit_path( :id => t.id, :title => @title, :before_id => params["id"] )  %>
+            <%= link_to "編集" , edits_edit_path( :id => t['id'], :title => @title, :before_id => params["id"] )  %>
         </td>
     </tr>
     <% end %>

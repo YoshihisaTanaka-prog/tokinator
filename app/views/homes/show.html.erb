@@ -3,7 +3,7 @@
     <% @tables.each do |t| %>
     <tr>
         <td>
-            <%= link_to t.table_name , show_path( :id => t.after_id, :title => t.next_title_name) %>
+            <%= link_to t["table_name"] , show_path( :id => t["after_id"], :title => t["next_title_name"]) %>
         </td>
     </tr>
     <% end %>

@@ -27,4 +27,54 @@ class ApplicationController < ActionController::Base
     end
 
 
+    def get_table id, min, compere_title
+        routes = Route.where(before_id: id,strength: min..).to_a
+
+        score = []
+        routes.each do |r|
+            score.push(r.find_count)
+        end
+
+        if compere_title != nil then
+            for i in 0..(routes.length-1) do
+                for j in 0..(routes.length-2-i) do
+                    if score[j][compere_title] < score[j+1][compere_title] then
+                        s_keep = score[j]
+                        score[j] = score[j+1]
+                        score[j+1] = s_keep
+                    end
+                end
+            end
+        end
+
+        for i in 0..(routes.length-1) do
+            for j in 0..(routes.length-2-i) do
+                if score[j]["strength"] < score[j+1]["strength"] then
+                    s_keep = score[j]
+                    score[j] = score[j+1]
+                    score[j+1] = s_keep
+                end
+            end
+        end
+
+        group_score = score.group_by do |s|
+            s["group"]
+        end
+
+        group_list = []
+        routes.each do |r|
+            if ! group_list.include?(r.group) then
+                group_list.push(r.group)
+            end
+        end
+
+        ret = []
+        group_list.each do |g|
+            ret.push(group_score[g])
+        end
+        ret.flatten!
+        return ret
+    end
+
+
 end

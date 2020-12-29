@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
 
   get 'edits', to: 'autho#index'
+  get 'edits/index', to: 'autho#index'
   get 'edits/caution', to: 'autho#caution'
   get 'edits/add', to: 'autho#edit_add'
   post 'edits/add', to: 'autho#edit_add'
