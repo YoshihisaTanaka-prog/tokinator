@@ -7,12 +7,22 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.0]
       t.string   :email,              null: false, default: ""
       t.string   :encrypted_password, null: false, default: ""
 
-      t.integer  :level,             null: false, default: 0
+      t.integer  :level,              null: false, default: 0
       t.datetime :request_levelup_at
+
+      t.integer  :edit_route_count,   null: false, default: 0
+      t.time     :edit_route_count_start 
+
+      t.integer  :edit_goal_count,    null: false, default: 0
+      t.time     :edit_goal_count_start 
+
+      t.integer  :support_count,      null: false, default: 0
+      t.time     :support_count_start 
+
+      t.time     :reset_password_sent_at
 
       ## Recoverable
       t.string   :reset_password_token
-      t.datetime :reset_password_sent_at
 
       ## Rememberable
       t.datetime :remember_created_at

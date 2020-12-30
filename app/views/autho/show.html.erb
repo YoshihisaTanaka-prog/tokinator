@@ -27,7 +27,7 @@
             <%= link_to t["table_name"] , edits_show_path( :id => t["after_id"], :title => t["next_title_name"]) %>
         </td>
         
-        <% if t["strength"] == -1 then %>
+        <% if t["strength"] == -2 then %>
             <td>
                 /
             </td>
@@ -39,7 +39,7 @@
             </td>
         <% end %>
         
-        <% if t['strength'] == 0 then %>
+        <% if t['strength'] == -1 then %>
             <td>
                 <%= t['strength'] %>
             </td>
@@ -51,7 +51,7 @@
             </td>
         <% end %>
         
-        <% if t['strength'] > 0 then %>
+        <% if t['strength'] >= 0 then %>
             <td>
                 <%= t['strength'] %>
             </td>

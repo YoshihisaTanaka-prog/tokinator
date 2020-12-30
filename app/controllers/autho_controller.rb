@@ -93,12 +93,12 @@ class AuthoController < ApplicationController
             end
         end
         @title = params["title"]
-        @tables = get_table @before_id,0,nil
+        @tables = get_table @before_id,-2,nil
 
         @ids = 0
         @tables.each do |t|
             id =  t["after_id"].split("-").last.to_i
-            if @ids < id
+            if @ids < id then
                 @ids = id
             end
         end

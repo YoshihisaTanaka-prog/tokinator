@@ -8,7 +8,13 @@ class HomesController < ApplicationController
 
     def show
       @title = params["title"]
-      @tables = get_table params["id"],0,"total-access"
+      if params["id"].length > 1 then
+        route = Route.where(after_id: params["id"]).last
+        route.total_accessed += 1
+        route.total_accessed_start = Time.now
+        route.save
+      end
+      @tables = get_table params["id"],-1,"total_accessed"
       if @tables.blank? then
         redirect_to  controller: :homes, action: :constructing, params: {"title": params["title"] , "id": params["id"]}
       end

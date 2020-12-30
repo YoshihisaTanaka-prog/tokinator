@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
     end
 
     def limit_strong
-        if current_user.email != "nakanaka.tanaka4413@gmail.com" then
+        if current_user.id != 1 then
             if current_user.level == 0 then
                 redirect_to controller: :homes, action: :caution, params: {"level": "最強のユーザレベル"}
             else
@@ -28,37 +28,14 @@ class ApplicationController < ActionController::Base
 
 
     def get_table id, min, compere_title
-        routes = Route.where(before_id: id,strength: min..).to_a
-
-        score = []
-        routes.each do |r|
-            score.push(r.find_count)
+        if compere_title.blank? then
+            routes = Route.where(before_id: id,strength: min..).order("strength DESC")
+        else
+            routes = Route.where(before_id: id,strength: min..).order("strength DESC",compere_title + " DESC")
         end
 
-        if compere_title != nil then
-            for i in 0..(routes.length-1) do
-                for j in 0..(routes.length-2-i) do
-                    if score[j][compere_title] < score[j+1][compere_title] then
-                        s_keep = score[j]
-                        score[j] = score[j+1]
-                        score[j+1] = s_keep
-                    end
-                end
-            end
-        end
-
-        for i in 0..(routes.length-1) do
-            for j in 0..(routes.length-2-i) do
-                if score[j]["strength"] < score[j+1]["strength"] then
-                    s_keep = score[j]
-                    score[j] = score[j+1]
-                    score[j+1] = s_keep
-                end
-            end
-        end
-
-        group_score = score.group_by do |s|
-            s["group"]
+        group_routes = routes.group_by do |r|
+            r.group
         end
 
         group_list = []
@@ -70,7 +47,7 @@ class ApplicationController < ActionController::Base
 
         ret = []
         group_list.each do |g|
-            ret.push(group_score[g])
+            ret.push(group_routes[g])
         end
         ret.flatten!
         return ret
