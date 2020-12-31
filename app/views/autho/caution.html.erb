@@ -3,5 +3,16 @@
 「<%= current_user.email %>」さんには権限が与えられていません。<br>
 アクセスしようとしたページには<font color = red><%= @level %></font>が必要です。
 </p>
+<% if @level != '最強のユーザレベル' and @show then%>
+    <p><%= link_to '権限をリクエストする' , ReqUsrLv_path( :user => current_user.email , :level => @level ) %></p>
+    <p>一度リクエストを行うと24時間リクエストを送信できなくなります。</p>
+<% else %>
+    <p>
+    現在権限のリクエストを送信できません。<br>
+    あと<%= @hour %>時間<%= @second %>分<%= @minute %>秒お待ちください。
+    </p>
+<% end %>
+<%= @time1 %><br>
+<%= @time2 %>
 
 <p><%= link_to 'トップページに戻る', edits_path %></p>

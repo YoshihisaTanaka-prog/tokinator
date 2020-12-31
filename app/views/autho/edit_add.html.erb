@@ -9,6 +9,18 @@
         <td><%= text_field_tag("next_title_name") %></td>
     </tr>
     <tr>
+        <th>優先度を記入</th>
+        <td><%= telephone_field_tag("strength", 0) %></td>
+    </tr>
+    <tr>
+        <th>グループを記入</th>
+        <td><%= telephone_field_tag("group", params["group"]) %></td>
+    </tr>
+    <tr>
+        <th>コメントを記入(任意)</th>
+        <td><%= text_area_tag("comment") %></td>
+    </tr>
+    <tr>
     <th></th>
     <td><%= submit_tag("追加")%></td>
     </tr>

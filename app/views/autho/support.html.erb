@@ -1,0 +1,7 @@
+<% @tables.each do |t| %>
+    <% if t.first == 0 then %>
+        <%= link_to "業務連絡", support_chat_path(:id => t.first) %>
+    <% else %>
+        <%= link_to t.first, support_chat_path(:id => t.first) %>
+    <% end %>
+<% end %>

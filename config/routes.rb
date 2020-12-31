@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   get 'edits/caution', to: 'autho#caution'
   get 'edits/add', to: 'autho#edit_add'
   post 'edits/add', to: 'autho#edit_add'
+  get 'edits/comment', to: 'autho#comment'
+  post 'edits/comment', to: 'autho#comment'
   get 'edits/create_route', to: 'autho#edit_create'
   post 'edits/create_route', to: 'autho#edit_create'
   get 'edits/edit', to: 'autho#edit'
@@ -30,7 +32,14 @@ Rails.application.routes.draw do
   get 'edits/edit_update', to: 'autho#edit_update'
 
 
+  get 'ReqUsrLv', to: 'autho#ReqUsrLv'
+
+
   get 'statistics', to: 'statistics#index'
+
+
+  get 'support', to: 'autho#support'
+  get 'support/chat', to: 'autho#chat'
 
 
   get 'index'          , to: 'homes#index'

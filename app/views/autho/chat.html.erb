@@ -1,0 +1,11 @@
+<% @chats.each do |c| %>
+    <div class="autho-chat">
+    <p>
+        <%= c.text %>
+    </p>
+    <p>
+        <%= c.created_at %>
+    </p>
+    <a href="<%= c.url %>" ></a>
+    </div>
+<% end %>

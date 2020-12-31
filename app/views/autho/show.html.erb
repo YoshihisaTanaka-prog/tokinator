@@ -1,17 +1,20 @@
-<h1>「<%= @title %>」の編集</h1>
-
-<hr>
 <%= form_tag edits_search_path( :before_id => params["before_id"] ) do %>
     <%= text_field_tag("id")%>
     <%= submit_tag("検索") %>
 <% end %>
+
 <hr>
-<% if @before_id == "0" then %>
-    <%= link_to "戻る",edits_path %>
-<% elsif @before_id == "1" then %>
+
+<% if @before_id == 0 then %>
     <%= link_to "戻る",edits_path %>
 <% else %>
-    <%= link_to "戻る", edits_show_path( :id => @bbefore_id, :title => @before_title ) %>
+    <%= link_to "戻る", edits_show_path( :id => @before_id) %>
+<% end %>
+
+<h1>「<%= @title %>」の編集</h1>
+<%= form_tag edits_comment_path( :id => @id) do %>
+    <%= text_area_tag("comment", @comment) %>
+    <%= submit_tag("編集") %>
 <% end %>
 
 <table>
@@ -24,7 +27,7 @@
     <% @tables.each do |t| %>
     <tr>
         <td>
-            <%= link_to t["table_name"] , edits_show_path( :id => t["after_id"], :title => t["next_title_name"]) %>
+            <%= link_to t["table_name"] , edits_show_path( :id => t.id ) %>
         </td>
         
         <% if t["strength"] == -2 then %>
@@ -82,4 +85,4 @@
     </tr>
     <% end %>
 </table>
-<td><%= link_to "+", edits_add_path( :before_id => params["id"], :ids => @ids, :title => @title ) %></td>
+<td><%= link_to "+", edits_add_path( :before_id => @b_id, :ids => @id_max, :title => @title, :group => @group_max ) %></td>

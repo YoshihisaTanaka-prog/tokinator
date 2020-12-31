@@ -50,10 +50,9 @@ class Route < ApplicationRecord
         return ret
     end
 
-    def count_plus(id,title)
-        count = self.find_count(id)[title].last
-        count.count += 1
-        count.save
+    def count_plus(title)
+        self[title] += 1
+        self.save
     end
 
 end

@@ -64,7 +64,7 @@ class CreateRoutes < ActiveRecord::Migration[6.0]
       t.integer       :h3n_score,    null: false, default: 0
       t.time          :h3n_start
 
-      t.integer       :const_ructing, null: false, default: 0
+      t.integer       :constructing, null: false, default: 0
       t.time          :constructing_accessed_at
 
       t.timestamps

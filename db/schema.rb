@@ -84,7 +84,7 @@ ActiveRecord::Schema.define(version: 2020_12_30_051345) do
     t.integer "h3n_accessed", default: 0, null: false
     t.integer "h3n_score", default: 0, null: false
     t.time "h3n_start"
-    t.integer "const_ructing", default: 0, null: false
+    t.integer "constructing", default: 0, null: false
     t.time "constructing_accessed_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -95,6 +95,7 @@ ActiveRecord::Schema.define(version: 2020_12_30_051345) do
     t.integer "customer_id"
     t.boolean "isFromI"
     t.text "text"
+    t.text "url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -111,7 +112,7 @@ ActiveRecord::Schema.define(version: 2020_12_30_051345) do
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.integer "level", default: 0, null: false
-    t.datetime "request_levelup_at"
+    t.time "request_levelup_at", null: false
     t.integer "edit_route_count", default: 0, null: false
     t.time "edit_route_count_start"
     t.integer "edit_goal_count", default: 0, null: false

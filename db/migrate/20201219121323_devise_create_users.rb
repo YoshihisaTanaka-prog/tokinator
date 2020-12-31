@@ -8,7 +8,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.0]
       t.string   :encrypted_password, null: false, default: ""
 
       t.integer  :level,              null: false, default: 0
-      t.datetime :request_levelup_at
+      t.time     :request_levelup_at, null: false, default: Time.current.ago(2.days)
 
       t.integer  :edit_route_count,   null: false, default: 0
       t.time     :edit_route_count_start 

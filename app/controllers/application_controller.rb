@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
     # ページに入れるユーザを制限する
   
     def limit_normal num
-        if current_user.level < num then
+        if current_user.level < num and current_user.id > 1 then
             if current_user.level == 0 then
                 redirect_to controller: :homes, action: :caution, params: {"level": num.to_s + "以上のユーザレベル"}
             else

@@ -1,9 +1,10 @@
 <h1><%= @title %></h1>
+<h3><%= @comment %></h3>
 <table>
     <% @tables.each do |t| %>
     <tr>
         <td>
-            <%= link_to t["table_name"] , show_path( :id => t["after_id"], :title => t["next_title_name"]) %>
+            <%= link_to t["table_name"] , show_path( :id => t.id ) %>
         </td>
     </tr>
     <% end %>

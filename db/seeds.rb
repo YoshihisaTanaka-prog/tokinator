@@ -6,3 +6,4 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+Route.create([{before_id: "index",after_id: "0",next_title_name:"どのジャンルの問題ですか？"},{before_id: "index",after_id: "1",next_title_name:"どのジャンルの計算ですか？"}])
