@@ -93,9 +93,9 @@ ActiveRecord::Schema.define(version: 2020_12_30_051345) do
 
   create_table "support_chats", force: :cascade do |t|
     t.integer "customer_id"
-    t.boolean "isFromI"
+    t.boolean "isFromCustomer"
     t.text "text"
-    t.text "url"
+    t.text "url", default: "", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

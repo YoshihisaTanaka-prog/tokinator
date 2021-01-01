@@ -3,9 +3,9 @@ class CreateSupportChats < ActiveRecord::Migration[6.0]
     create_table :support_chats do |t|
       
       t.integer :customer_id
-      t.boolean :isFromI
+      t.boolean :isFromCustomer
       t.text    :text
-      t.text    :url
+      t.text    :url, null: false, default: ''
 
       t.timestamps
     end

@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
             if current_user.level == 0 then
                 redirect_to controller: :homes, action: :caution, params: {"level": num.to_s + "以上のユーザレベル"}
             else
-                redirect_to controller: :edits, action: :caution, params: {"level": num.to_s + "以上のユーザレベル"}
+                redirect_to controller: :autho, action: :caution, params: {"level": num.to_s + "以上のユーザレベル"}
             end
         end
     end
@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
             if current_user.level == 0 then
                 redirect_to controller: :homes, action: :caution, params: {"level": "最強のユーザレベル"}
             else
-                redirect_to controller: :edits, action: :caution, params: {"level": "最強のユーザレベル"}
+                redirect_to controller: :autho, action: :caution, params: {"level": "最強のユーザレベル"}
             end
         end
     end

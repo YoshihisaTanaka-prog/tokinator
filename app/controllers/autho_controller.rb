@@ -30,9 +30,9 @@ class AuthoController < ApplicationController
     def ReqUsrLv
         obj = SupportChat.new
         obj.customer_id = 0
-        obj.isFromI = false
+        obj.isFromCustomer = true
         obj.text = params['user'] + 'さんが' + params['level'] + 'を要求しました'
-        obj.url = "https://localhost:8443/"
+        obj.url = "https://localhost:8443/autho?user=" + params['user']
         obj.save
         if current_user.level == 0 then
             redirect_to controller: :homes, action: :caution, params: {"level": params['level']}
@@ -206,6 +206,8 @@ class AuthoController < ApplicationController
     # DM
 
     def support
+        limit_normal 1
+        
         tables = SupportChat.all.order(created_at: :desc)
         @tables = tables.group_by do |t|
             t.customer_id
@@ -213,7 +215,20 @@ class AuthoController < ApplicationController
     end
 
     def chat
-        @chats = SupportChat.where(customer_id: params['id']).order(created_at: :desc)
+        limit_normal 1
+
+        id = params['id'].to_i
+        @chats = SupportChat.where(customer_id: id).order(:created_at)
+    end
+
+    def chat_write
+        limit_normal 1
+        
+        if request.post? then
+            chat = SupportChat.new({customer_id: params['id'], text: params['text'], isFromCustomer: false})
+            chat.save
+            redirect_to support_chat_path( :id => params['id'])
+        end
     end
 
 end

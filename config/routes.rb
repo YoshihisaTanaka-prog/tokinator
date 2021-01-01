@@ -40,6 +40,7 @@ Rails.application.routes.draw do
 
   get 'support', to: 'autho#support'
   get 'support/chat', to: 'autho#chat'
+  post 'support/chat/write', to: 'autho#chat_write'
 
 
   get 'index'          , to: 'homes#index'
@@ -48,6 +49,8 @@ Rails.application.routes.draw do
   get 'caution'        , to: 'homes#caution'
 
   get 'app/show'       , to: 'app_homes#show'
+  get 'app/chat'      , to: 'app_homes#chat'
+  post 'app/chat/write'      , to: 'app_homes#chat_write'
 
 
   devise_scope :user do
