@@ -4,6 +4,7 @@
 <% end %>
 
 <hr>
+<%= link_to "トップ",edits_path %>
 
 <% if @before_id == 0 then %>
     <%= link_to "戻る",edits_path %>
@@ -11,7 +12,13 @@
     <%= link_to "戻る", edits_show_path( :id => @before_id) %>
 <% end %>
 
-<h1>「<%= @title %>」の編集</h1>
+<%= form_tag edits_title_path( :id => @id) do %>
+    <h1>「  
+    <%= text_field_tag("comment", @title) %>
+    」の
+    <%= submit_tag("編集") %>
+    </h1>
+<% end %>
 <%= form_tag edits_comment_path( :id => @id) do %>
     <%= text_area_tag("comment", @comment) %>
     <%= submit_tag("編集") %>

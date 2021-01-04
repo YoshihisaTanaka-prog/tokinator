@@ -1,7 +1,10 @@
+<p><%= link_to "トップ", edits_path %></p>
+<hr>
+
 <% @tables.each do |t| %>
     <% if t.first == 0 then %>
         <%= link_to "業務連絡", support_chat_path(:id => t.first) %><br>
     <% else %>
-        <%= link_to "顧客No."+t.first.to_s, support_chat_path(:id => t.first) %>
+        <%= link_to "顧客No."+t.first.to_s, support_chat_path(:id => t.first) %><br>
     <% end %>
 <% end %>

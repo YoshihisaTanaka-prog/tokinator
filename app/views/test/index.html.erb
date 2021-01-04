@@ -1,0 +1,9 @@
+<h1>Test#index</h1>
+<p>Find me in app/views/test/index.html.erb</p>
+
+
+<%= form_tag app_chat_write_path() do %>
+    <%= telephone_field_tag("id", 1) %>
+    <%= text_area_tag("text", @comment) %>
+    <%= submit_tag("編集") %>
+<% end %>

@@ -5,9 +5,9 @@ class AppHomesController < ApplicationController
     def show
       attribute = params["attribute"]
       if attribute.blank? then
-        tables = get_table params["id"],0,"total-access"
+        tables = get_table params["id"],-1,"total_accessed"
       else
-        tables = get_table params["id"],0,attribute+"-access"
+        tables = get_table params["id"],-1,attribute+"_accessed"
       end
       render :json => tables
     end

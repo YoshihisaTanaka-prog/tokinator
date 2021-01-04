@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   
+  get 'test/index'
+  
   root to: 'homes#index'
 
   
@@ -28,6 +30,8 @@ Rails.application.routes.draw do
   post 'edits/search', to: 'autho#search'
   get 'edits/show', to: 'autho#show'
   post 'edits/show', to: 'autho#show'
+  get 'edits/title', to: 'autho#title'
+  post 'edits/title', to: 'autho#title'
   post 'edits/edit_update', to: 'autho#edit_update'
   get 'edits/edit_update', to: 'autho#edit_update'
 
