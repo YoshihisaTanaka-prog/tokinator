@@ -45,7 +45,7 @@ class AppHomesController < ApplicationController
         obj = Customer.new
         obj.user_attribute = params["attribute"]
         obj.save
-        render :json => obj.i
+        render :json => obj.id
       end
     end
 
