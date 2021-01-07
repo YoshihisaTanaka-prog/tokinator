@@ -3,20 +3,11 @@ class AppHomesController < ApplicationController
     skip_before_action :verify_authenticity_token
 
     def index
-      render ""
+      render "{}"
     end
 
     def show
       if request.post? then
-        check_token params['token']
-        attribute = params["attribute"]
-        if attribute.blank? then
-          tables = get_table params["id"],-1,"total_accessed"
-        else
-          tables = get_table params["id"],-1,attribute+"_accessed"
-        end
-        render :json => tables
-      else
         check_token params['token']
         attribute = params["attribute"]
         if attribute.blank? then
@@ -33,9 +24,6 @@ class AppHomesController < ApplicationController
         check_token params['token']
         chats = SupportChat.where(customer_id: params['id']).order(:created_at)
         render :json => chats
-      else
-        chats = SupportChat.where(customer_id: params['id']).order(:created_at)
-        render :json => chats
       end
     end
 
@@ -48,24 +36,12 @@ class AppHomesController < ApplicationController
         chat.isFromCustomer = true
         chat.save
         render :json => chat
-      else
-        chat = SupportChat.new
-        chat.customer_id = params['id']
-        chat.text = params['text']
-        chat.isFromCustomer = true
-        chat.save
-        render :json => chat
       end
     end
     
     def user
       if request.post? then
         check_token params['token']
-        obj = Customer.new
-        obj.user_attribute = params["attribute"]
-        obj.save
-        render :json => obj
-      else
         obj = Customer.new
         obj.user_attribute = params["attribute"]
         obj.save
