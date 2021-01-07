@@ -56,8 +56,11 @@ Rails.application.routes.draw do
   get 'apolo'          , to: 'homes#apology'
 
   get 'app'            , to: 'app_homes#index'
+  get 'app/show'       , to: 'app_homes#show'
   post 'app/show'       , to: 'app_homes#show'
+  get 'app/chat'       , to: 'app_homes#chat'
   post 'app/chat'       , to: 'app_homes#chat'
+  get 'app/chat/write', to: 'app_homes#chat_write'
   post 'app/chat/write', to: 'app_homes#chat_write'
   get 'app/user'       , to: 'app_homes#user'
   post 'app/user'       , to: 'app_homes#user'

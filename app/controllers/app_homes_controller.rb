@@ -16,6 +16,15 @@ class AppHomesController < ApplicationController
           tables = get_table params["id"],-1,attribute+"_accessed"
         end
         render :json => tables
+      else
+        check_token params['token']
+        attribute = params["attribute"]
+        if attribute.blank? then
+          tables = get_table params["id"],-1,"total_accessed"
+        else
+          tables = get_table params["id"],-1,attribute+"_accessed"
+        end
+        render :json => tables
       end
     end
 
@@ -24,12 +33,22 @@ class AppHomesController < ApplicationController
         check_token params['token']
         chats = SupportChat.where(customer_id: params['id']).order(:created_at)
         render :json => chats
+      else
+        chats = SupportChat.where(customer_id: params['id']).order(:created_at)
+        render :json => chats
       end
     end
 
     def chat_write
       if request.post? then
         check_token params['token']
+        chat = SupportChat.new
+        chat.customer_id = params['id']
+        chat.text = params['text']
+        chat.isFromCustomer = true
+        chat.save
+        render :json => chat
+      else
         chat = SupportChat.new
         chat.customer_id = params['id']
         chat.text = params['text']
