@@ -8,7 +8,6 @@ class HomesController < ApplicationController
 
     def show
       obj = Route.find(params['id'])
-      obj.total_accessed += 1
       @title = obj.next_title_name
       @comment = obj.comment
       @tables = get_table obj.after_id,-1,'total_accessed'
@@ -20,6 +19,12 @@ class HomesController < ApplicationController
     end
 
     def constructing
+    end
+
+    def apology
+      obj = Route.find(params['id'])
+      obj.constructing += 1
+      obj.save
     end
   
     def caution

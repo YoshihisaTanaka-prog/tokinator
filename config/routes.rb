@@ -30,6 +30,8 @@ Rails.application.routes.draw do
   post 'edits/search', to: 'autho#search'
   get 'edits/show', to: 'autho#show'
   post 'edits/show', to: 'autho#show'
+  get 'edits/solution', to: 'autho#solution'
+  post 'edits/upload-pdf', to: 'autho#upload_pdf'
   get 'edits/title', to: 'autho#title'
   post 'edits/title', to: 'autho#title'
   post 'edits/edit_update', to: 'autho#edit_update'
@@ -51,10 +53,13 @@ Rails.application.routes.draw do
   get 'show'           , to: 'homes#show'
   get 'constructing'   , to: 'homes#constructing'
   get 'caution'        , to: 'homes#caution'
+  get 'apolo'          , to: 'homes#apology'
 
-  get 'app/show'       , to: 'app_homes#show'
-  get 'app/chat'      , to: 'app_homes#chat'
-  post 'app/chat/write'      , to: 'app_homes#chat_write'
+  get 'app'            , to: 'app_homes#index'
+  post 'app/show'       , to: 'app_homes#show'
+  post 'app/chat'       , to: 'app_homes#chat'
+  post 'app/chat/write', to: 'app_homes#chat_write'
+  post 'app/user'       , to: 'app_homes#user'
 
 
   devise_scope :user do

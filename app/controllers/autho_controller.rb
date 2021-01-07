@@ -101,6 +101,13 @@ class AuthoController < ApplicationController
         end
     end
 
+    def title
+        obj = Route.find(params['id'])
+        obj.next_title_name = params['title']
+        obj.save
+        redirect_to edits_show_path(:id => params['id'])
+    end
+
 
     # 追加系
 
@@ -177,6 +184,21 @@ class AuthoController < ApplicationController
                 redirect_to controller: :autho, action: :show, params: {"title": route.last.next_title_name , "id": id}
             end
         end
+    end
+
+
+    # pdf系
+
+    def upload_pdf
+        if request.post? then
+            @pdf = Pdf.new(upload_params)
+            if @pdf.save
+                redirect_to solution_path
+            end
+        end
+    end
+
+    def solution
     end
 
 
