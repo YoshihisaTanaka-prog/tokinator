@@ -59,6 +59,7 @@ Rails.application.routes.draw do
   post 'app/show'       , to: 'app_homes#show'
   post 'app/chat'       , to: 'app_homes#chat'
   post 'app/chat/write', to: 'app_homes#chat_write'
+  get 'app/user'       , to: 'app_homes#user'
   post 'app/user'       , to: 'app_homes#user'
 
 
