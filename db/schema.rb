@@ -133,7 +133,7 @@ ActiveRecord::Schema.define(version: 2021_01_06_112007) do
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.integer "level", default: 0, null: false
-    t.time "request_levelup_at", default: "2000-01-01 10:59:09", null: false
+    t.time "request_levelup_at", null: false
     t.integer "edit_route_count", default: 0, null: false
     t.time "edit_route_count_start"
     t.integer "edit_goal_count", default: 0, null: false

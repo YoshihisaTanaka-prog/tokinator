@@ -108,6 +108,11 @@ class AuthoController < ApplicationController
         redirect_to edits_show_path(:id => params['id'])
     end
 
+    def image
+        obj = Route.find(params['id'])
+        obj.update(route_params)
+    end
+
 
     # 追加系
 
@@ -151,6 +156,8 @@ class AuthoController < ApplicationController
             @before_id = Route.where(after_id: obj.before_id).last.id
         end
         @title = obj.next_title_name
+        @image_url = obj.image.url
+        @image = obj.image
         @tables = get_table obj.after_id,-2,nil
 
         @comment = obj.comment
@@ -252,5 +259,10 @@ class AuthoController < ApplicationController
             redirect_to support_chat_path( :id => params['id'])
         end
     end
+
+    private
+        def route_params
+            params.require(:route).permit(:image)
+        end
 
 end
