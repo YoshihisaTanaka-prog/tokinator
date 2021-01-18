@@ -32,7 +32,7 @@ class AuthoController < ApplicationController
         obj.customer_id = 0
         obj.isFromCustomer = true
         obj.text = params['user'] + 'さんが' + params['level'] + 'を要求しました'
-        obj.url = "https://localhost:8443/autho?user=" + params['user']
+        obj.url = "/autho?user=" + params['user']
         obj.save
         if current_user.level == 0 then
             redirect_to controller: :homes, action: :caution, params: {"level": params['level']}
@@ -109,8 +109,12 @@ class AuthoController < ApplicationController
     end
 
     def image
+        uploader = ImageUploader.new
+        uploader.store!(params['image'])
         obj = Route.find(params['id'])
-        obj.update(route_params)
+        obj.image = params[:image]
+        obj.save
+        redirect_to edits_show_path(:id => params['id'])
     end
 
 
@@ -149,20 +153,20 @@ class AuthoController < ApplicationController
 
     def show
         limit_normal 2
-        obj = Route.find(params['id'])
-        if obj.before_id == 'index'
+        @obj = Route.find(params['id'])
+        if @obj.before_id == 'index'
             @before_id = 0
         else
-            @before_id = Route.where(after_id: obj.before_id).last.id
+            @before_id = Route.where(after_id: @obj.before_id).last.id
         end
-        @title = obj.next_title_name
-        @image_url = obj.image.url
-        @image = obj.image
-        @tables = get_table obj.after_id,-2,nil
+        @title = @obj.next_title_name
+        @image_url = @obj.image.url
+        @image = @obj.image
+        @tables = get_table @obj.after_id,-2,nil
 
-        @comment = obj.comment
-        @id = obj.id
-        @b_id = obj.after_id
+        @comment = @obj.comment
+        @id = @obj.id
+        @b_id = @obj.after_id
         @id_max = 0
         @group_max = -1
         @tables.each do |t|
@@ -219,16 +223,13 @@ class AuthoController < ApplicationController
         obj.level = params[:level]
         obj.save
         
-        redirect_to "/autho"
+        redirect_to autho_path( :user => params['user'] )
     end
   
     def authentication
         limit_strong
-
         @msg = "Please type search word..."
-    
-        @q = User.ransack(params[:q])
-        @users = @q.result(distinct: true)
+        @users = User.where( "email LIKE?", "%#{params['user']}%" ).order( :id )
     end
 
 
@@ -260,9 +261,9 @@ class AuthoController < ApplicationController
         end
     end
 
-    private
-        def route_params
-            params.require(:route).permit(:image)
-        end
+    # private
+    #     def route_params
+    #         params.require(:route).permit(:image)
+    #     end
 
 end

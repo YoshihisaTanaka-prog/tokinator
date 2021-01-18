@@ -49,4 +49,7 @@ class HomesController < ApplicationController
       @level = params["level"]
     end
 
+    def store
+    end
+
 end

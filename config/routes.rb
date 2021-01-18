@@ -57,6 +57,7 @@ Rails.application.routes.draw do
   get 'constructing'   , to: 'homes#constructing'
   get 'caution'        , to: 'homes#caution'
   get 'apolo'          , to: 'homes#apology'
+  get 'store'          , to: 'homes#store'
 
   get 'app'            , to: 'app_homes#index'
   get 'app/show'       , to: 'app_homes#show'
