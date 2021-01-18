@@ -4,6 +4,7 @@ class CreateSupportChats < ActiveRecord::Migration[6.0]
       
       t.integer :customer_id
       t.boolean :isFromCustomer
+      t.boolean :isAbleToShowAuthor
       t.text    :text
       t.text    :url, null: false, default: ''
 

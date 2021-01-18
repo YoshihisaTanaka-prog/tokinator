@@ -9,8 +9,10 @@
     </tr>
     <% end %>
     <tr>
-        <td>
-            <%= link_to "この中にはない" , apolo_path( :id => params['id'] ) %>
-        </td>
+        <% if @tables.last.strength != -1 %>
+            <td>
+                <%= link_to "この中にはない" , apolo_path( :id => params['id'] ) %>
+            </td>
+        <% end %>
     </tr>
 </table>

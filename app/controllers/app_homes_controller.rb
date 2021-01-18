@@ -34,6 +34,7 @@ class AppHomesController < ApplicationController
         chat.customer_id = params['id']
         chat.text = params['text']
         chat.isFromCustomer = true
+        chat.isAbleToShowAuthor = true
         chat.save
         render :json => chat
       end
