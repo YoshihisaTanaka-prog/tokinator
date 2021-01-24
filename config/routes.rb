@@ -12,6 +12,10 @@ Rails.application.routes.draw do
   post 'autho/update', to: 'autho#authentication_update'
   patch 'autho/update', to: 'autho#authentication_update'
 
+  post 'advice', to: 'advice#create'
+  patch 'advice/:id', to: 'advice#update'
+  get 'advice/:id', to: 'advice#delete'
+
 
   get 'edits', to: 'autho#index'
   get 'edits/index', to: 'autho#index'

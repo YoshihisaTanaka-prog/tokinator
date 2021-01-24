@@ -109,12 +109,11 @@ class AuthoController < ApplicationController
     end
 
     def image
-        uploader = ImageUploader.new
-        uploader.store!(params['image'])
         obj = Route.find(params['id'])
-        obj.image = params[:image]
+        obj.update(route_params)
         obj.save
-        redirect_to edits_show_path(:id => params['id'])
+        render :json => obj
+        #redirect_to edits_show_path(:id => params['id'])
     end
 
 
@@ -160,7 +159,6 @@ class AuthoController < ApplicationController
             @before_id = Route.where(after_id: @obj.before_id).last.id
         end
         @title = @obj.next_title_name
-        @image_url = @obj.image.url
         @image = @obj.image
         @tables = get_table @obj.after_id,-2,nil
 
@@ -261,9 +259,9 @@ class AuthoController < ApplicationController
         end
     end
 
-    # private
-    #     def route_params
-    #         params.require(:route).permit(:image)
-    #     end
+    private 
+    def route_params
+        params.permit(:image)
+    end
 
 end

@@ -25,13 +25,13 @@
     <%= submit_tag("編集") %>
 <% end %>
 
-<% if @image_url.blank? %>
+<% if @image.blank? %>
     <%= form_tag edits_image_path( :id => @id ) do %>
         <%= file_field_tag :image %>
         <%= submit_tag("追加") %>
     <% end %>
 <% else %>
-    <%= image_tag @image_url %><br>
+    <%= image_tag @image.to_s %><br>
     <%= form_tag edits_image_path( :id => @id ) do %>
         <%= file_field_tag :image %>
         <%= submit_tag("追加") %>

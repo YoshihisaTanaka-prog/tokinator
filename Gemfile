@@ -29,6 +29,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.2', require: false
 
 gem 'devise'
+gem 'cloudinary'
 gem 'carrierwave'
 gem 'rmagick'
 gem 'coffee-rails'

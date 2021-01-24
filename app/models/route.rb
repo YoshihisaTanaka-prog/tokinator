@@ -1,6 +1,6 @@
 class Route < ApplicationRecord
     
-    mount_uploader :image, ImageUploader
+    mount_uploader :image, RouteCommentUploader
 
     def count_title_list
         ret = []
