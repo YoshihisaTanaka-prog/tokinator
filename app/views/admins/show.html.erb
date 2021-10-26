@@ -1,0 +1,40 @@
+<table>
+    <tr>
+        <th class="name" style="padding-left: 1vh;">管理者名</th><th>メールアドレス</th><th>権限の状況</th>
+    </tr>
+    <% @admins.each do |admin| %>
+        <tr>
+            <td class="name">
+                <%= admin.name %>
+            </td>
+            <td>
+                <%= admin.email %>
+            </td>
+            <td>
+                <% if admin.id == current_admin.id %>
+                <% elsif admin.permitted %>
+                    <%= button_to "管理者", permit_path(admin.id), class: "btn" %>
+                <% else %>
+                    <%= button_to "非管理者", permit_path(admin.id), class: "btn" %>
+                <% end %>
+
+                <% if admin.id == current_admin.id %>
+                <% elsif admin.operator && admin.permitted %>
+                    <%= button_to "オペレーター", operator_path(admin.id), class: "btn" %>
+                <% elsif admin.permitted %>
+                    <%= button_to "非オペレーター", operator_path(admin.id), class: "btn" %>
+                <% else %>
+                    非オペレーター<br>
+                <% end %>
+
+                <% if admin.admin %>
+                    最高管理者
+                <% elsif admin.permitted %>
+                    <%= button_to "非最高管理者", adminadmin_path(admin.id) %>
+                <% else %>
+                    非最高管理者
+                <% end %>
+            </td>
+        </tr>
+    <% end %>
+</table>

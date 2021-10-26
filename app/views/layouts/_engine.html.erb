@@ -1,0 +1,11 @@
+<% unless @is_initial_page %>
+    <h3>(<%= session[:subject_name] %>を選択中)</h3>
+<% end %>
+<h2><%= @question %></h2>
+<%= link_to "最初から選ぶ", "/delete-" unless @is_initial_page %>
+
+<ul>
+    <% @options.each do |option| %>
+        <li><%= link_to option["name"], option["url"] %></li>
+    <% end %>
+</ul>

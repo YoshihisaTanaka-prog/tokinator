@@ -20,7 +20,6 @@ gem 'dotenv-rails'
 
 gem 'mime-types'
 gem 'ncmb-ruby-client'
-gem 'devise'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
@@ -28,6 +27,9 @@ gem 'devise'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
+
+gem 'devise'
+gem 'dotenv-rails'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false

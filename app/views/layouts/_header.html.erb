@@ -1,0 +1,26 @@
+<header>
+    <h2>トキネーター</h2>
+    <ul>
+        <li></li>
+        <% unless controller.controller_name == "tops" && controller.action_name == "index" %>
+            <li><%= link_to "トップへ", root_path %></li>
+        <% end %>
+        <% if admin_signed_in? %>
+            <% if current_admin.permitted && controller.controller_name == "tops" %>
+                <li>
+                    <%= link_to "編集", edits_path %></li>
+                </li>
+            <% end %>
+            <% if current_admin.admin %>
+                <li>
+                    <%= select_tag 'setting', options_for_select(@setting_options, selected: "#"), onchange: 'location.href=value;' %>
+                </li>
+            <% end %>
+            <li><%= link_to "ユーザー情報の編集", edit_admin_registration_path %></li>
+            <li><%= link_to "サインアウト", destroy_admin_session_path, method: :delete %></li>
+        <% else %>
+            <li><%= link_to "サインイン", new_admin_session_path %></li>
+            <li><%= link_to "サインアップ",  new_admin_registration_path %></li>
+        <% end %>
+    </ul>
+</header>
