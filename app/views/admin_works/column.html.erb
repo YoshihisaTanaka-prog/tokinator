@@ -1,0 +1,13 @@
+<%= render partial: 'class_option'%>
+<% unless session[:class].blank? %>
+    <%= form_tag(columns_path) do %>
+        追加したいカラム名：
+        <%= text_field_tag :name %>
+    <% end %>
+<% end %>
+
+<ul>
+    <% @columns.each do |c| %>
+        <li><%= c.name %></li>
+    <% end %>
+</ul>

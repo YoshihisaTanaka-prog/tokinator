@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
 
 
     def common_first_method
-        @setting_options = [['サイトの設定', '#'], ["権限管理", admin_all_path], ["教科の追加・編集", subjects_path], ["トキネーターカラムの追加", tokinator_columns_path]]
+        @setting_options = [['サイトの設定', '#'], ["権限管理", admin_all_path], ["データの追加・編集", ncmbs_path], ["カラムの追加", columns_path]]
     end
 
     def engine(sent_url)
@@ -29,10 +29,11 @@ class ApplicationController < ActionController::Base
             if params[:para].include?("-")
                 para = params[:para].split("-")
                 if para[0] == 'sub'
-                    subjects = Subject.where(identifier: para[1])
+                    ncmb_objects = NCMB::DataStore.new "Subject"
+                    subjects = ncmb_objects.where('id', para[1])
                     unless subjects.blank?
                         subj = subjects.first
-                        session[:subject] = subj.identifier
+                        session[:subject] = subj.id
                         session[:subject_name] = subj.name
                     end
                 else
@@ -50,26 +51,27 @@ class ApplicationController < ActionController::Base
         @is_initial_page = false
         if session[:subject].blank?
             @is_initial_page = true
-            subjects = Subject.all
+            ncmb_objects = NCMB::DataStore.new "Subject"
+            subjects = ncmb_objects.all
             @question = "教科を選んでください。"
             subjects.each do |subject|
-                @options.push({'name' => subject.name, 'url' => main_url+"/"+"sub-"+subject.identifier})
+                @options.push({'name' => subject.name, 'url' => main_url+"/"+"sub-"+subject.id})
             end
         elsif session[:id].blank?
-            object1 = NCMB::DataStore.new "Tokinator"
-            new_options = object1.where("before_id", 'sub-'+session[:subject])
+            object1 = NCMB::DataStore.new "Selection"
+            new_options = object1.where("beforeId", 'sub-'+session[:subject])
             @question = "何を求めよと聞かれていますか？"
             new_options.each do |option|
-                @options.push({'name' => option.name, 'url' => main_url+"/"+option.objectId})
+                @options.push({'name' => option.myOption, 'url' => main_url+"/"+option.objectId})
             end
         else
-            object1 = NCMB::DataStore.new "Tokinator"
-            object2 = NCMB::DataStore.new "Tokinator"
-            new_options = object1.where("before_id", session[:id])
+            object1 = NCMB::DataStore.new "Selection"
+            object2 = NCMB::DataStore.new "Selection"
+            new_options = object1.where("beforeId", session[:id])
             selected_option = object2.where("objectId", session[:id]).first
-            @question = selected_option.question
+            @question = selected_option[:nextQuestion]
             new_options.each do |option|
-                @options.push({'name' => option.name, 'url' => main_url+"/"+option.objectId})
+                @options.push({'name' => option.myOption, 'url' => main_url+"/"+option.objectId})
             end
         end
     end

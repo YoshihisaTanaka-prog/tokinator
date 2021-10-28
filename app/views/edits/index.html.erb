@@ -1,1 +1,16 @@
+<h2>編集用</h2>
+<% unless session[:id].blank? %>
+    <%= form_tag update_path do %>
+        <%= hidden_field_tag :objectId %>
+        質問文の編集<%= text_field_tag :nextQuestion, @question %>
+    <% end %>
+<% end %>
+<h2>表示内容</h2>
+<hr>
 <%= render partial: 'layouts/engine' %>
+<hr>
+<%= form_tag update_path do %>
+    選択肢の追加<br>
+    選択肢に書くこと<%= text_field_tag :myOption %><br>
+    次に聞くこと<%= text_field_tag :nextQuestion %>
+<% end %>

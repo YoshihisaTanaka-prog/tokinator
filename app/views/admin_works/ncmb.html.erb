@@ -1,0 +1,28 @@
+<%= render partial: 'class_option'%>
+<table>
+    <tr>
+        <% @columns.each do |column| %>
+            <th><%= column %></th>
+        <% end %>
+    </tr>
+    <tr>
+        <%= form_tag(ncmb_path) do %>
+            <% @columns.each do |column| %>
+                <td><%= text_field_tag column %></td>
+            <% end %>
+            <td><%= submit_tag '追加' %><td>
+        <% end %>
+    </tr>
+    <% @tables.each do |table| %>
+        <tr>
+            <%= form_tag(ncmb_path) do %>
+                <%= hidden_field_tag('objectId', table[:objectId]) %>
+                <% @columns.each do |column| %>
+                    <td><%= text_field_tag column, table[column.to_sym] %></td>
+                <% end %>
+                <td><%= submit_tag '編集' %><td>
+            <% end %>
+        </tr>
+    <% end %>
+    </tr>
+</table>

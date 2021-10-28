@@ -1,0 +1,6 @@
+<% if session[:class].blank? %>
+    <h2>クラスが未選択です。</h2>
+<% else %>
+    <h2><%= session[:class] %>クラスを設定中</h2>
+<% end %>
+<%= select_tag 'クラス選択', options_for_select(@class_option, selected: "#"), onchange: 'location.href=value;' %>
